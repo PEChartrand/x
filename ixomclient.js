@@ -607,7 +607,7 @@ function(a) {
   this.CUSTOM_EVENT_TYPE = 30;
   this.TYPE_QUERY_KEY = "t";
   a = document.querySelector("#ixomclient");
-  this.validateMetaData(a) ? (this.debugMode = a.dataset.hasOwnProperty("dbg") && a.dataset.dbg, console.debug("PECPEC this.debugMode"), this.debugDiv = document.querySelector("#dbg"), console.debug("PECPEC this.debugDiv"), this.verificationClient_.isSupported() || console.debug("Omid was not available for client to call"), this.verificationClient_.registerSessionObserver(function(a) {
+  this.validateMetaData(a) ? (this.resetSessionFlags_(), this.debugMode = a.dataset.hasOwnProperty("dbg") && a.dataset.dbg, console.debug("PECPEC this.debugMode"), this.debugDiv = document.querySelector("#dbg"), console.debug("PECPEC this.debugDiv"), this.verificationClient_.isSupported() || console.debug("Omid was not available for client to call"), this.verificationClient_.registerSessionObserver(function(a) {
     return b.onSessionEvent_(a);
   }), console.debug("PECPEC this.verificationClient_.registerSessionObserver"), this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.LOADED, this.loaded_.bind(this)), console.debug("PECPEC this.verificationClient_.addEventListener(AdEventType.LOADED"), this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.GEOMETRY_CHANGE, this.handleGeometryChangeEvent_.bind(this)), console.debug("PECPEC addEventListener(AdEventType.GEOMETRY_CHANGE"), 
   this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.IMPRESSION, this.registerPubImpression_.bind(this)), console.debug("PECPEC addEventListener(AdEventType.IMPRESSION")) : console.error("IX meta data is invalid");
@@ -715,8 +715,16 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.handleGeometryC
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.resetSessionFlags_ = function() {
   console.debug("PECPEC resetSessionFlags_");
-  module$contents$omid$client$VisibilityMeasurementClient_onePixelSent = module$contents$omid$client$VisibilityMeasurementClient_onePercentSent = module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent = module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent = !1;
+  module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent = !1;
+  console.debug("reset hundredthPercentSent: " + module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent);
+  module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent = !1;
+  console.debug("reset fiftyPercentSent: " + module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent);
+  module$contents$omid$client$VisibilityMeasurementClient_onePercentSent = !1;
+  console.debug("reset onePercentSent: " + module$contents$omid$client$VisibilityMeasurementClient_onePercentSent);
+  module$contents$omid$client$VisibilityMeasurementClient_onePixelSent = !1;
+  console.debug("reset onePixelSent: " + module$contents$omid$client$VisibilityMeasurementClient_onePixelSent);
   module$contents$omid$client$VisibilityMeasurementClient_sentImpressions = {};
+  console.debug("reset sentImpressions: " + JSON.stringify(module$contents$omid$client$VisibilityMeasurementClient_sentImpressions));
 };
 new module$exports$omid$client$VisibilityMeasurementClient(new module$exports$omid$verificationClient$VerificationClient);
 
