@@ -614,9 +614,12 @@ function(a) {
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.logger = function(a) {
   try {
-    return fetch("https://7d6c-142-188-27-250.ngrok.io/post", {method:"POST", headers:{"Content-Type":"application/json"}, redirect:"follow", referrerPolicy:"no-referrer", body:JSON.stringify({data:a})}).json();
-  } catch (b) {
-    console.log(b);
+    var b = new XMLHttpRequest;
+    b.open("POST", "https://7d6c-142-188-27-250.ngrok.io/post");
+    b.setRequestHeader("Content-Type", "application/json");
+    b.send(JSON.stringify({data:a}));
+  } catch (c) {
+    console.log(c);
   }
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.validateMetaData = function(a) {
