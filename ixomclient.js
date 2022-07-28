@@ -600,20 +600,17 @@ module$exports$omid$verificationClient$VerificationClient.prototype.sendMessage_
 var module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_onePercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_onePixelSent = !1, module$contents$omid$client$VisibilityMeasurementClient_sentImpressions = {}, module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter = 0, module$exports$omid$client$VisibilityMeasurementClient = 
 function(a) {
   var b = this;
-  this.logger("PECPEC constructor");
+  console.debug("PECPEC constructor");
   this.verificationClient_ = a;
   this.IMPRESSION_EVENT_TYPE = 1;
   this.GEOMETRY_EVENT_TYPE = 2;
   this.CUSTOM_EVENT_TYPE = 30;
   this.TYPE_QUERY_KEY = "t";
   a = document.querySelector("#ixomclient");
-  this.validateMetaData(a) ? (this.debugMode = a.dataset.hasOwnProperty("dbg") && a.dataset.dbg, this.logger("PECPEC this.debugMode"), this.debugDiv = document.querySelector("#dbg"), this.logger("PECPEC this.debugDiv"), this.verificationClient_.isSupported() || this.logger("Omid was not available for client to call"), this.verificationClient_.registerSessionObserver(function(a) {
+  this.validateMetaData(a) ? (this.debugMode = a.dataset.hasOwnProperty("dbg") && a.dataset.dbg, console.debug("PECPEC this.debugMode"), this.debugDiv = document.querySelector("#dbg"), console.debug("PECPEC this.debugDiv"), this.verificationClient_.isSupported() || console.debug("Omid was not available for client to call"), this.verificationClient_.registerSessionObserver(function(a) {
     return b.onSessionEvent_(a);
-  }), this.logger("PECPEC this.verificationClient_.registerSessionObserver"), this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.LOADED, this.loaded_.bind(this)), this.logger("PECPEC this.verificationClient_.addEventListener(AdEventType.LOADED"), this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.GEOMETRY_CHANGE, this.handleGeometryChangeEvent_.bind(this)), this.logger("PECPEC addEventListener(AdEventType.GEOMETRY_CHANGE"), 
-  this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.IMPRESSION, this.registerPubImpression_.bind(this)), this.logger("PECPEC addEventListener(AdEventType.IMPRESSION")) : console.error("IX meta data is invalid");
-};
-module$exports$omid$client$VisibilityMeasurementClient.prototype.logger = function(a) {
-  console.log(a);
+  }), console.debug("PECPEC this.verificationClient_.registerSessionObserver"), this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.LOADED, this.loaded_.bind(this)), console.debug("PECPEC this.verificationClient_.addEventListener(AdEventType.LOADED"), this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.GEOMETRY_CHANGE, this.handleGeometryChangeEvent_.bind(this)), console.debug("PECPEC addEventListener(AdEventType.GEOMETRY_CHANGE"), 
+  this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.IMPRESSION, this.registerPubImpression_.bind(this)), console.debug("PECPEC addEventListener(AdEventType.IMPRESSION")) : console.error("IX meta data is invalid");
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.validateMetaData = function(a) {
   null == a && console.error("An element with ID ixomclient is required for this omclient to work ");
@@ -635,7 +632,7 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.getEventTracerU
   return "https://" + this.eventTrackerDomain + "/event/oe?" + this.publisherIDParameter + "&" + this.traceIDParameter + "&" + a + c;
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.sendToEventTracker = function(a, b, c) {
-  this.logger("PECPEC sendToEventTracker: " + b[0].value);
+  console.debug("PECPEC sendToEventTracker: " + b[0].value);
   a = this.getEventTracerUrl(a, b);
   b = new XMLHttpRequest;
   b.open("POST", a);
@@ -643,10 +640,10 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.sendToEventTrac
   b.send(c);
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.registerPubImpression_ = function() {
-  this.logger("PECPEC registerPubImpression_");
+  console.debug("PECPEC registerPubImpression_");
   this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"pubimp"}]);
   module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter++;
-  1 < module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter && (this.logger("PECPEC pubImpCounter: " + module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter), this.debugMode && (this.debugDiv.innerHTML = this.debugDiv.innerHTML + "<pre><mark> multipubimp: " + module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter + " </mark></pre>"), this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"multipubimp"}]));
+  1 < module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter && (console.debug("PECPEC pubImpCounter: " + module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter), this.debugMode && (this.debugDiv.innerHTML = this.debugDiv.innerHTML + "<pre><mark> multipubimp: " + module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter + " </mark></pre>"), this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"multipubimp"}]));
   this.debugMode && (this.debugDiv.innerHTML = this.debugDiv.innerHTML + "<pre><mark> pubimp  " + this.getEventTracerUrl(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"pubimp"}]) + "</mark></pre>");
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.onSessionEvent_ = function(a) {
@@ -667,9 +664,9 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.onSessionEvent_
   }
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.viewed = function() {
-  this.logger("PECPEC viewed");
-  module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent || module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent || module$contents$omid$client$VisibilityMeasurementClient_onePercentSent || module$contents$omid$client$VisibilityMeasurementClient_onePixelSent ? (this.logger("PECPEC isviewed"), this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"viewed"}])) : (this.logger("PECPEC notviewed"), this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", 
-  value:"notviewed"}]));
+  console.debug("PECPEC viewed");
+  module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent || module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent || module$contents$omid$client$VisibilityMeasurementClient_onePercentSent || module$contents$omid$client$VisibilityMeasurementClient_onePixelSent ? (console.debug("PECPEC isviewed"), this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"viewed"}])) : (console.debug("PECPEC notviewed"), this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, 
+  [{key:"fd", value:"notviewed"}]));
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.loaded_ = function() {
   console.debug("PECPEC loaded");
@@ -681,26 +678,26 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.impressionOccur
   this.callImpressionOccurred_();
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.callImpressionOccurred_ = function() {
-  this.logger("PECPEC callImpressionOccurred_");
+  console.debug("PECPEC callImpressionOccurred_");
   this.sendToEventTracker(this.IMPRESSION_EVENT_TYPE, null);
   this.debugMode && (this.debugDiv.innerHTML = this.debugDiv.innerHTML + "<pre><mark> imp   " + this.getEventTracerUrl(this.IMPRESSION_EVENT_TYPE, null) + "</mark></pre>");
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.callErrorOccurred_ = function() {
-  this.logger("PECPEC callErrorOccurred_");
+  console.debug("PECPEC callErrorOccurred_");
   this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"error"}]);
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.fireImpUrls_ = function(a) {
   var b = this;
-  this.logger("PECPEC fireImpUrls_");
+  console.debug("PECPEC fireImpUrls_");
   if (0 !== a) {
     a = 0;
     for (var c = {}; this.currentScriptTag.dataset.hasOwnProperty("impurl-" + a);) {
       var d = this.currentScriptTag.dataset["impurl-" + a];
-      module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[d] || (this.logger("PECPEC FIRE IMPRESSSION: " + d), c.$jscomp$loop$prop$xhr$7 = new XMLHttpRequest, c.$jscomp$loop$prop$xhr$7.onreadystatechange = function(a) {
+      module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[d] || (console.debug("PECPEC FIRE IMPRESSSION: " + d), c.$jscomp$loop$prop$xhr$7 = new XMLHttpRequest, c.$jscomp$loop$prop$xhr$7.onreadystatechange = function(a) {
         return function() {
           a.$jscomp$loop$prop$xhr$7.readyState === XMLHttpRequest.DONE && 200 !== a.$jscomp$loop$prop$xhr$7.status && b.sendToEventTracker(b.CUSTOM_EVENT_TYPE, [{key:"fd", value:"badresponse"}]);
         };
-      }(c), module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[d] = !0, this.logger("PECPEC sentImprssions[url]: " + module$contents$omid$client$VisibilityMeasurementClient_sentImpressions), c.$jscomp$loop$prop$xhr$7.open("GET", d), c.$jscomp$loop$prop$xhr$7.send(), a++);
+      }(c), module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[d] = !0, console.debug("PECPEC sentImprssions[url]: " + module$contents$omid$client$VisibilityMeasurementClient_sentImpressions), c.$jscomp$loop$prop$xhr$7.open("GET", d), c.$jscomp$loop$prop$xhr$7.send(), a++);
       c = {$jscomp$loop$prop$xhr$7:c.$jscomp$loop$prop$xhr$7};
     }
     0 < a ? this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"impurlfired"}]) : this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"impurlnotfired"}]);
@@ -710,13 +707,13 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.handleGeometryC
   if (!module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent) {
     var b = a.data.adView.percentageInView;
     this.fireImpUrls_(b);
-    100 !== b || module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent ? 50 <= b && 100 > b && !module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent ? (this.logger("PECPEC percentageInView >= 50"), this.sendToEventTracker(this.GEOMETRY_EVENT_TYPE, null, JSON.stringify(a.data)), this.debugMode && (this.debugDiv.innerHTML = this.debugDiv.innerHTML + "<pre><mark>  50%+ " + this.getEventTracerUrl(this.GEOMETRY_EVENT_TYPE, null) + "</mark></pre>"), module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent = 
-    !0) : 0 < b && 50 > b && !module$contents$omid$client$VisibilityMeasurementClient_onePercentSent && (this.logger("PECPEC percentageInView > 0"), this.sendToEventTracker(this.GEOMETRY_EVENT_TYPE, null, JSON.stringify(a.data)), this.debugMode && (this.debugDiv.innerHTML = this.debugDiv.innerHTML + "<pre><mark>   1%+ " + this.getEventTracerUrl(this.GEOMETRY_EVENT_TYPE, null) + "</mark></pre>"), module$contents$omid$client$VisibilityMeasurementClient_onePercentSent = !0) : (this.logger("PECPEC percentageInView === 100"), 
+    100 !== b || module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent ? 50 <= b && 100 > b && !module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent ? (console.debug("PECPEC percentageInView >= 50"), this.sendToEventTracker(this.GEOMETRY_EVENT_TYPE, null, JSON.stringify(a.data)), this.debugMode && (this.debugDiv.innerHTML = this.debugDiv.innerHTML + "<pre><mark>  50%+ " + this.getEventTracerUrl(this.GEOMETRY_EVENT_TYPE, null) + "</mark></pre>"), module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent = 
+    !0) : 0 < b && 50 > b && !module$contents$omid$client$VisibilityMeasurementClient_onePercentSent && (console.debug("PECPEC percentageInView > 0"), this.sendToEventTracker(this.GEOMETRY_EVENT_TYPE, null, JSON.stringify(a.data)), this.debugMode && (this.debugDiv.innerHTML = this.debugDiv.innerHTML + "<pre><mark>   1%+ " + this.getEventTracerUrl(this.GEOMETRY_EVENT_TYPE, null) + "</mark></pre>"), module$contents$omid$client$VisibilityMeasurementClient_onePercentSent = !0) : (console.debug("PECPEC percentageInView === 100"), 
     this.sendToEventTracker(this.GEOMETRY_EVENT_TYPE, null, JSON.stringify(a.data)), this.debugMode && (this.debugDiv.innerHTML = this.debugDiv.innerHTML + "<pre><mark> 100%+ " + this.getEventTracerUrl(this.GEOMETRY_EVENT_TYPE, null) + "</mark></pre>"), module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent = !0);
   }
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.resetSessionFlags_ = function() {
-  this.logger("PECPEC resetSessionFlags_");
+  console.debug("PECPEC resetSessionFlags_");
   module$contents$omid$client$VisibilityMeasurementClient_onePixelSent = module$contents$omid$client$VisibilityMeasurementClient_onePercentSent = module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent = module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent = !1;
   module$contents$omid$client$VisibilityMeasurementClient_sentImpressions = {};
 };
