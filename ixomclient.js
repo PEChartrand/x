@@ -698,7 +698,7 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.fireImpUrls_ = 
         return function() {
           a.$jscomp$loop$prop$xhr$7.readyState === XMLHttpRequest.DONE && 200 !== a.$jscomp$loop$prop$xhr$7.status && b.sendToEventTracker(b.CUSTOM_EVENT_TYPE, [{key:"fd", value:"badresponse"}]);
         };
-      }(c), module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[d] = !0, console.debug("PECPEC sentImprssions[url]: " + module$contents$omid$client$VisibilityMeasurementClient_sentImpressions), c.$jscomp$loop$prop$xhr$7.open("GET", d), c.$jscomp$loop$prop$xhr$7.send(), a++);
+      }(c), module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[d] = !0, console.debug("PECPEC sentImprssions[url]: " + JSON.stringify(module$contents$omid$client$VisibilityMeasurementClient_sentImpressions)), c.$jscomp$loop$prop$xhr$7.open("GET", d), c.$jscomp$loop$prop$xhr$7.send(), a++);
       c = {$jscomp$loop$prop$xhr$7:c.$jscomp$loop$prop$xhr$7};
     }
     0 < a ? this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"impurlfired"}]) : this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"impurlnotfired"}]);
