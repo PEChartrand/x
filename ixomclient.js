@@ -648,11 +648,12 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.registerPubImpr
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.onSessionEvent_ = function(a) {
   console.debug("PECPEC registerSessionObjerser");
-  console.debug(a);
+  console.debug("PECPEC eventtype: " + a.type);
   switch(a.type) {
     case module$exports$omid$common$constants.AdEventType.SESSION_START:
+    case module$exports$omid$common$constants.AdEventType.LOADED:
       console.debug("PECPEC SESSION START");
-      this.impressionOccurred();
+      this.sessionStartOccurred();
       break;
     case module$exports$omid$common$constants.AdEventType.SESSION_FINISH:
       console.debug("PECPEC SESSION FINISH");
@@ -673,12 +674,12 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.loaded_ = funct
   this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"adload"}]);
   this.debugMode && (this.debugDiv.innerHTML = this.debugDiv.innerHTML + "<pre><mark> load  " + this.getEventTracerUrl(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"adload"}]) + "</mark></pre>");
 };
-module$exports$omid$client$VisibilityMeasurementClient.prototype.impressionOccurred = function() {
+module$exports$omid$client$VisibilityMeasurementClient.prototype.sessionStartOccurred = function() {
   console.debug("PECPEC impressionOccured()");
-  this.callImpressionOccurred_();
+  this.callSessionStartOccurred_();
 };
-module$exports$omid$client$VisibilityMeasurementClient.prototype.callImpressionOccurred_ = function() {
-  console.debug("PECPEC callImpressionOccurred_");
+module$exports$omid$client$VisibilityMeasurementClient.prototype.callSessionStartOccurred_ = function() {
+  console.debug("PECPEC callSessionStartOccurred_");
   this.sendToEventTracker(this.IMPRESSION_EVENT_TYPE, null);
   this.debugMode && (this.debugDiv.innerHTML = this.debugDiv.innerHTML + "<pre><mark> imp   " + this.getEventTracerUrl(this.IMPRESSION_EVENT_TYPE, null) + "</mark></pre>");
 };
