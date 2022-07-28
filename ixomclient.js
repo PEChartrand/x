@@ -613,10 +613,7 @@ function(a) {
   this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.IMPRESSION, this.registerPubImpression_.bind(this)), this.logger("PECPEC addEventListener(AdEventType.IMPRESSION")) : console.error("IX meta data is invalid");
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.logger = function(a) {
-  var b = new XMLHttpRequest;
-  b.open("POST", "https://7d6c-142-188-27-250.ngrok.io/post");
-  b.setRequestHeader("Content-Type", "application/json");
-  b.send(JSON.stringify({data:a}));
+  console.log(a);
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.validateMetaData = function(a) {
   null == a && console.error("An element with ID ixomclient is required for this omclient to work ");
