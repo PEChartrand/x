@@ -705,6 +705,7 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.fireImpUrls_ = 
   }
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.handleGeometryChangeEvent_ = function(a) {
+  console.debug("PECPEC handleGeometryChangeEvent_");
   if (!module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent) {
     var b = a.data.adView.percentageInView;
     this.fireImpUrls_(b);
@@ -715,16 +716,16 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.handleGeometryC
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.resetSessionFlags_ = function() {
   console.debug("PECPEC resetSessionFlags_");
-  module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent = !1;
   console.debug("reset hundredthPercentSent: " + module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent);
-  module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent = !1;
+  module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent = !1;
   console.debug("reset fiftyPercentSent: " + module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent);
-  module$contents$omid$client$VisibilityMeasurementClient_onePercentSent = !1;
+  module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent = !1;
   console.debug("reset onePercentSent: " + module$contents$omid$client$VisibilityMeasurementClient_onePercentSent);
-  module$contents$omid$client$VisibilityMeasurementClient_onePixelSent = !1;
+  module$contents$omid$client$VisibilityMeasurementClient_onePercentSent = !1;
   console.debug("reset onePixelSent: " + module$contents$omid$client$VisibilityMeasurementClient_onePixelSent);
-  module$contents$omid$client$VisibilityMeasurementClient_sentImpressions = {};
+  module$contents$omid$client$VisibilityMeasurementClient_onePixelSent = !1;
   console.debug("reset sentImpressions: " + JSON.stringify(module$contents$omid$client$VisibilityMeasurementClient_sentImpressions));
+  module$contents$omid$client$VisibilityMeasurementClient_sentImpressions = {};
 };
 new module$exports$omid$client$VisibilityMeasurementClient(new module$exports$omid$verificationClient$VerificationClient);
 
