@@ -600,7 +600,7 @@ module$exports$omid$verificationClient$VerificationClient.prototype.sendMessage_
 var module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_onePercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_onePixelSent = !1, module$contents$omid$client$VisibilityMeasurementClient_sentImpressions = {}, module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter = 0;
 function module$contents$omid$client$VisibilityMeasurementClient_logger(a) {
   try {
-    return fetch("https://example.com", {method:"POST", headers:{"Content-Type":"application/json"}, redirect:"follow", referrerPolicy:"no-referrer", body:JSON.stringify({data:a})}).json();
+    return fetch("https://d2f5-142-188-27-250.ngrok.io/post", {method:"POST", headers:{"Content-Type":"application/json"}, redirect:"follow", referrerPolicy:"no-referrer", body:JSON.stringify({data:a})}).json();
   } catch (b) {
     console.log(b);
   }
