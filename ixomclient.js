@@ -660,7 +660,7 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.onSessionEvent_
       console.debug("PECPEC SESSION FINISH");
       this.viewed();
       this.resetSessionFlags_();
-      this.verificationClient_ = null;
+      location.reload();
       break;
     case module$exports$omid$common$constants.AdEventType.SESSION_ERROR:
       console.debug("PECPEC SESSION ERROR"), this.callErrorOccurred_(a.data);
