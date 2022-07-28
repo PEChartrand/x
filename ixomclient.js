@@ -645,7 +645,6 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.registerPubImpr
   module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter++;
   1 < module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter && (console.debug("PECPEC pubImpCounter: " + module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter), this.debugMode && (this.debugDiv.innerHTML = this.debugDiv.innerHTML + "<pre><mark> multipubimp: " + module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter + " </mark></pre>"), this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"multipubimp"}]));
   this.debugMode && (this.debugDiv.innerHTML = this.debugDiv.innerHTML + "<pre><mark> pubimp  " + this.getEventTracerUrl(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"pubimp"}]) + "</mark></pre>");
-  this.verificationClient_ = null;
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.onSessionEvent_ = function(a) {
   console.debug("PECPEC registerSessionObjerser");
