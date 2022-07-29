@@ -606,6 +606,7 @@ module$exports$omid$verificationClient$VerificationClient.prototype.sendMessage_
 var module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_onePercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_onePixelSent = !1, module$contents$omid$client$VisibilityMeasurementClient_sentImpressions = {}, module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter = 0, module$exports$omid$client$VisibilityMeasurementClient = 
 function(a) {
   var b = this;
+  this.log("has render: " + window.IX_RENDER_COUNTER_95784, "debug");
   this.log("constructor", "debug");
   this.verificationClient_ = a;
   this.IMPRESSION_EVENT_TYPE = 1;
