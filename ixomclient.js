@@ -654,7 +654,7 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.getEventTracerU
   return "https://" + this.eventTrackerDomain + "/event/oe?" + this.publisherIDParameter + "&" + this.traceIDParameter + "&" + a + c;
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.sendToEventTracker = function(a, b, c) {
-  this.log("sendToEventTracker: " + b[0].value);
+  this.log("sendToEventTracker: " + b[0].value, "debug");
   a = this.getEventTracerUrl(a, b);
   b = new XMLHttpRequest;
   b.open("POST", a);
