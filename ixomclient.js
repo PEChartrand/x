@@ -1,7 +1,10 @@
+console.log("IX: RENDER IX_RENDER_COUNTER_95784 render " + IX_RENDER_COUNTER_95784);
 if (IX_RENDER_COUNTER_95784 === undefined) {
     var IX_RENDER_COUNTER_95784 = 0
+    console.log("IX: RENDER IX_RENDER_COUNTER_95784 init " + IX_RENDER_COUNTER_95784);
 } else {
     IX_RENDER_COUNTER_95784++
+    console.log("IX: RENDER IX_RENDER_COUNTER_95784 increment " + IX_RENDER_COUNTER_95784);
 }
 
 (function() {
