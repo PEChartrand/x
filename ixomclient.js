@@ -692,6 +692,7 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.viewed = functi
 module$exports$omid$client$VisibilityMeasurementClient.prototype.loaded_ = function() {
   this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"adload"}]);
   this.log("loaded", "debug");
+  this.log("has render: " + window.IX_RENDER_COUNTER_95784, "debug");
   void 0 !== window.IX_RENDER_COUNTER_95784 && 0 < window.IX_RENDER_COUNTER_95784 && this.fireImpUrls_();
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.sessionStartOccurred = function() {
@@ -708,7 +709,7 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.callErrorOccurr
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.fireImpUrls_ = function() {
   var a = this;
-  console.debug("fireImpUrls_()", "debug");
+  this.log("fireImpUrls_()", "debug");
   for (var b = 0, c = {}; this.currentScriptTag.dataset.hasOwnProperty("impurl-" + b);) {
     c.$jscomp$loop$prop$url$8 = this.currentScriptTag.dataset["impurl-" + b], module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[c.$jscomp$loop$prop$url$8] ? this.log("impression url has been fired: " + c.$jscomp$loop$prop$url$8, "debug") : (this.log("===> FIRING IMPRESSION <===: " + c.$jscomp$loop$prop$url$8, "debug"), c.$jscomp$loop$prop$xhr$7 = new XMLHttpRequest, c.$jscomp$loop$prop$xhr$7.onreadystatechange = function(b) {
       return function() {
