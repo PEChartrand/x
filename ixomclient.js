@@ -507,7 +507,7 @@ module$exports$omid$verificationClient$VerificationClient.prototype.injectionSou
 module$exports$omid$verificationClient$VerificationClient.prototype.registerSessionObserver = function(a, b) {
   (0,module$exports$omid$common$argsChecker.assertFunction)("functionToExecute", a);
   console.log("IX: this.omid3p: " + this.omid3p);
-  this.omid3p ? this.omid3p.registerSessionObserver(a, b, this.injectionId_) : this.sendMessage_("addSessionListener", a, b, this.injectionId_);
+  this.omid3p ? (console.log("IX: this.omid3p true: " + this.omid3p), this.omid3p.registerSessionObserver(a, b, this.injectionId_)) : (console.log("IX: this.omid3p FALSE"), this.sendMessage_("addSessionListener", a, b, this.injectionId_));
 };
 module$exports$omid$verificationClient$VerificationClient.prototype.addEventListener = function(a, b) {
   (0,module$exports$omid$common$argsChecker.assertTruthyString)("eventType", a);
