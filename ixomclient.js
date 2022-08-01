@@ -717,6 +717,13 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.onSessionEvent_
   switch(a.type) {
     case module$exports$omid$common$constants.AdEventType.SESSION_START:
     case module$exports$omid$common$constants.AdEventType.LOADED:
+      try {
+        this.verificationClient_.registerSessionObserver(function(a) {
+          return b.onSessionEvent_(a);
+        });
+      } catch (c) {
+        console.log(c.name + " " + c.media, "debug");
+      }
       this.log("SESSION START", "debug");
       this.sessionStartOccurred();
       break;
@@ -763,11 +770,11 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.fireImpUrls_ = 
   var a = this;
   this.log("fireImpUrls_()", "debug");
   for (var b = 0, c = {}; this.currentScriptTag.dataset.hasOwnProperty("impurl-" + b);) {
-    c.$jscomp$loop$prop$url$9 = this.currentScriptTag.dataset["impurl-" + b], module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[c.$jscomp$loop$prop$url$9] ? this.log("impression url has been fired: " + c.$jscomp$loop$prop$url$9, "debug") : (this.log("===> FIRING IMPRESSION <===: " + c.$jscomp$loop$prop$url$9, "debug"), c.$jscomp$loop$prop$xhr$8 = new XMLHttpRequest, c.$jscomp$loop$prop$xhr$8.onreadystatechange = function(b) {
+    c.$jscomp$loop$prop$url$10 = this.currentScriptTag.dataset["impurl-" + b], module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[c.$jscomp$loop$prop$url$10] ? this.log("impression url has been fired: " + c.$jscomp$loop$prop$url$10, "debug") : (this.log("===> FIRING IMPRESSION <===: " + c.$jscomp$loop$prop$url$10, "debug"), c.$jscomp$loop$prop$xhr$9 = new XMLHttpRequest, c.$jscomp$loop$prop$xhr$9.onreadystatechange = function(b) {
       return function() {
-        b.$jscomp$loop$prop$xhr$8.readyState === XMLHttpRequest.DONE && 200 !== b.$jscomp$loop$prop$xhr$8.status && (a.log("impression response error " + b.$jscomp$loop$prop$url$9, "debug"), a.sendToEventTracker(a.CUSTOM_EVENT_TYPE, [{key:"fd", value:"badresponse"}]));
+        b.$jscomp$loop$prop$xhr$9.readyState === XMLHttpRequest.DONE && 200 !== b.$jscomp$loop$prop$xhr$9.status && (a.log("impression response error " + b.$jscomp$loop$prop$url$10, "debug"), a.sendToEventTracker(a.CUSTOM_EVENT_TYPE, [{key:"fd", value:"badresponse"}]));
       };
-    }(c), module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[c.$jscomp$loop$prop$url$9] = !0, this.log("sentImpressions[url]: " + JSON.stringify(module$contents$omid$client$VisibilityMeasurementClient_sentImpressions), "debug"), c.$jscomp$loop$prop$xhr$8.open("GET", c.$jscomp$loop$prop$url$9), c.$jscomp$loop$prop$xhr$8.send()), b++, c = {$jscomp$loop$prop$xhr$8:c.$jscomp$loop$prop$xhr$8, $jscomp$loop$prop$url$9:c.$jscomp$loop$prop$url$9};
+    }(c), module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[c.$jscomp$loop$prop$url$10] = !0, this.log("sentImpressions[url]: " + JSON.stringify(module$contents$omid$client$VisibilityMeasurementClient_sentImpressions), "debug"), c.$jscomp$loop$prop$xhr$9.open("GET", c.$jscomp$loop$prop$url$10), c.$jscomp$loop$prop$xhr$9.send()), b++, c = {$jscomp$loop$prop$xhr$9:c.$jscomp$loop$prop$xhr$9, $jscomp$loop$prop$url$10:c.$jscomp$loop$prop$url$10};
   }
   0 < b ? (this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"impurlfired"}]), this.log("imp url fired", "debug")) : (this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"impurlnotfired"}]), this.log("imp url not fired", "debug"));
 };
