@@ -716,6 +716,9 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.onSessionEvent_
   this.log(a.data, "debug");
   switch(a.type) {
     case module$exports$omid$common$constants.AdEventType.SESSION_START:
+      this.log("SESSION START", "debug");
+      this.sessionStartOccurred();
+      break;
     case module$exports$omid$common$constants.AdEventType.LOADED:
       try {
         this.verificationClient_.registerSessionObserver(function(a) {
@@ -724,8 +727,6 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.onSessionEvent_
       } catch (c) {
         console.log(c.name + " " + c.media, "debug");
       }
-      this.log("SESSION START", "debug");
-      this.sessionStartOccurred();
       break;
     case module$exports$omid$common$constants.AdEventType.SESSION_FINISH:
       this.log("SESSION FINISH", "debug");
