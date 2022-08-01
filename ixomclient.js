@@ -692,8 +692,9 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.sendToEventTrac
   b.setRequestHeader("Content-Type", "application/json");
   b.send(c);
 };
-module$exports$omid$client$VisibilityMeasurementClient.prototype.registerPubImpression_ = function() {
-  this.log("registerPubImpression_", "debug");
+module$exports$omid$client$VisibilityMeasurementClient.prototype.registerPubImpression_ = function(a) {
+  this.log("registerPubImpression_ " + a.adSessionId, "debug");
+  this.log(a.data, "debug");
   this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"pubimp"}]);
   module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter++;
   1 < module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter && (this.log("pubImpCounter: " + module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter, "debug"), this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"multipubimp"}]));
@@ -701,6 +702,9 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.registerPubImpr
 module$exports$omid$client$VisibilityMeasurementClient.prototype.onSessionEvent_ = function(a) {
   this.log("onSessionEvent_()", "debug");
   this.log("eventtype: " + a.type, "debug");
+  this.log("adsesisonID : " + a.adSessionId, "debug");
+  this.log("data : ", "debug");
+  this.log(a.data, "debug");
   switch(a.type) {
     case module$exports$omid$common$constants.AdEventType.SESSION_START:
     case module$exports$omid$common$constants.AdEventType.LOADED:
@@ -753,6 +757,7 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.fireImpUrls_ = 
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.handleGeometryChangeEvent_ = function(a) {
   this.log("handleGeometryChangeEvent_", "debug");
+  this.log(a.data, "debug");
   if (!module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent) {
     var b = a.data.adView.percentageInView;
     0 < b && this.fireImpUrls_(b);
