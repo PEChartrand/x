@@ -739,6 +739,7 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.onSessionEvent_
       } catch (c) {
         console.log(c.name + " " + c.media, "debug");
       }
+      this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.IMPRESSION, this.registerPubImpression_.bind(this));
       break;
     case module$exports$omid$common$constants.AdEventType.SESSION_ERROR:
       this.log("SESSION ERROR", "debug"), this.callErrorOccurred_(a.data);
