@@ -1,16 +1,3 @@
-// eslint-disable-next-line no-undef
-
-console.log("IX: RENDER IX_RENDER_COUNTER_95784 render " + IX_RENDER_COUNTER_95784);
-
-
-if (IX_RENDER_COUNTER_95784 === undefined) {
-    var IX_RENDER_COUNTER_95784 = 0
-    console.log("IX: RENDER IX_RENDER_COUNTER_95784 init " + IX_RENDER_COUNTER_95784);
-} else {
-    IX_RENDER_COUNTER_95784++
-    console.log("IX: RENDER IX_RENDER_COUNTER_95784 increment " + IX_RENDER_COUNTER_95784);
-}
-
 (function() {
     const currentScriptTag = document.querySelector('#ixomclient');
     let pid = '';
@@ -616,8 +603,6 @@ module$exports$omid$verificationClient$VerificationClient.prototype.sendMessage_
 (0,module$exports$omid$common$exporter.packageExport)("OmidVerificationClient", module$exports$omid$verificationClient$VerificationClient);
 var module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_onePercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_onePixelSent = !1, module$contents$omid$client$VisibilityMeasurementClient_sentImpressions = {}, module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter = 0, module$exports$omid$client$VisibilityMeasurementClient = 
 function(a) {
-  var b = this;
-  this.log("has render: " + window.IX_RENDER_COUNTER_95784, "debug");
   this.log("constructor", "debug");
   this.verificationClient_ = a;
   this.IMPRESSION_EVENT_TYPE = 1;
@@ -625,29 +610,25 @@ function(a) {
   this.CUSTOM_EVENT_TYPE = 30;
   this.TYPE_QUERY_KEY = "t";
   a = document.querySelector("#ixomclient");
-  if (this.validateMetaData(a)) {
-    this.resetSessionFlags_();
-    this.debugMode = a.dataset.hasOwnProperty("dbg");
-    this.log("this.debugMode", "debug");
-    this.debugDiv = document.querySelector("#dbg");
-    this.log("this.debugDiv", "debug");
-    this.verificationClient_.isSupported() || this.log("Omid was not available for client to call", "warn");
+  this.validateMetaData(a) ? (this.debugMode = a.dataset.hasOwnProperty("dbg"), this.log("this.debugMode", "debug"), this.verificationClient_.isSupported() || this.log("Omid was not available for client to call", "warn"), this.registerToEvents(!1)) : this.log("meta data is invalid", "error");
+};
+module$exports$omid$client$VisibilityMeasurementClient.prototype.registerToEvents = function(a) {
+  var b = this;
+  if (!a || "194057" === this.publisherIDParameter) {
+    this.log("registerToEvents()", "debug");
     try {
       this.verificationClient_.registerSessionObserver(function(a) {
         return b.onSessionEvent_(a);
       });
     } catch (c) {
-      console.log(c.name + " " + c.media, "debug");
+      console.log(c.name + " " + c.media, "warn");
     }
-    this.log("this.verificationClient_.registerSessionObserver", "debug");
     this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.LOADED, this.loaded_.bind(this));
     this.log("this.verificationClient_.addEventListener(AdEventType.LOADED", "debug");
     this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.GEOMETRY_CHANGE, this.handleGeometryChangeEvent_.bind(this));
     this.log("addEventListener(AdEventType.GEOMETRY_CHANGE", "debug");
     this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.IMPRESSION, this.registerPubImpression_.bind(this));
     this.log("addEventListener(AdEventType.IMPRESSION", "debug");
-  } else {
-    this.log("meta data is invalid", "error");
   }
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.log = function(a, b) {
@@ -700,46 +681,23 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.registerPubImpr
   1 < module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter && (this.log("pubImpCounter: " + module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter, "debug"), this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"multipubimp"}]));
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.onSessionEvent_ = function(a) {
-  var b = this;
-  this.log("onSessionEvent_()", "debug");
-  this.log("eventtype: " + a.type, "debug");
-  this.log("adsesisonID : " + a.adSessionId, "debug");
-  this.log("data : ", "debug");
-  this.log(a.data, "debug");
+  this.log("onSessionEvent_() event.type: " + a.type + ", adSessionID: " + a.adSessionId, "debug");
   switch(a.type) {
     case module$exports$omid$common$constants.AdEventType.SESSION_START:
       this.log("SESSION START", "debug");
       this.sessionStartOccurred();
       break;
     case module$exports$omid$common$constants.AdEventType.LOADED:
-      try {
-        this.verificationClient_.registerSessionObserver(function(a) {
-          return b.onSessionEvent_(a);
-        });
-      } catch (c) {
-        console.log(c.name + " " + c.media, "debug");
-      }
+      this.registerToEvents(!0);
       break;
     case module$exports$omid$common$constants.AdEventType.SESSION_FINISH:
       this.log("SESSION FINISH", "debug");
       this.viewed();
       this.resetSessionFlags_();
-      try {
-        this.verificationClient_.registerSessionObserver(function(a) {
-          return b.onSessionEvent_(a);
-        });
-      } catch (c) {
-        console.log(c.name + " " + c.media, "debug");
-      }
-      this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.LOADED, this.loaded_.bind(this));
-      this.log("this.verificationClient_.addEventListener(AdEventType.LOADED", "debug");
-      this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.GEOMETRY_CHANGE, this.handleGeometryChangeEvent_.bind(this));
-      this.log("addEventListener(AdEventType.GEOMETRY_CHANGE", "debug");
-      this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.IMPRESSION, this.registerPubImpression_.bind(this));
-      this.log("addEventListener(AdEventType.IMPRESSION", "debug");
+      this.registerToEvents(!0);
       break;
     case module$exports$omid$common$constants.AdEventType.SESSION_ERROR:
-      this.log("SESSION ERROR", "debug"), this.callErrorOccurred_(a.data);
+      this.callErrorOccurred_(a.data);
   }
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.viewed = function() {
@@ -750,8 +708,6 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.viewed = functi
 module$exports$omid$client$VisibilityMeasurementClient.prototype.loaded_ = function() {
   this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"adload"}]);
   this.log("loaded", "debug");
-  this.log("has render: " + window.IX_RENDER_COUNTER_95784, "debug");
-  void 0 !== window.IX_RENDER_COUNTER_95784 && 0 < window.IX_RENDER_COUNTER_95784 && this.fireImpUrls_();
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.sessionStartOccurred = function() {
   this.log("impressionOccured()", "debug");
@@ -761,21 +717,24 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.callSessionStar
   this.log("callSessionStartOccurred_", "debug");
   this.sendToEventTracker(this.IMPRESSION_EVENT_TYPE, null);
 };
-module$exports$omid$client$VisibilityMeasurementClient.prototype.callErrorOccurred_ = function() {
-  this.log("callErrorOccurred_", "debug");
+module$exports$omid$client$VisibilityMeasurementClient.prototype.callErrorOccurred_ = function(a) {
+  this.log("callErrorOccurred - type:" + a.data.errorType + "; message: " + a.data.message, "warn");
   this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"error"}]);
 };
-module$exports$omid$client$VisibilityMeasurementClient.prototype.fireImpUrls_ = function() {
-  var a = this;
+module$exports$omid$client$VisibilityMeasurementClient.prototype.fireImpUrls_ = function(a) {
+  var b = this;
   this.log("fireImpUrls_()", "debug");
-  for (var b = 0, c = {}; this.currentScriptTag.dataset.hasOwnProperty("impurl-" + b);) {
-    c.$jscomp$loop$prop$url$9 = this.currentScriptTag.dataset["impurl-" + b], module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[c.$jscomp$loop$prop$url$9] ? this.log("impression url has been fired: " + c.$jscomp$loop$prop$url$9, "debug") : (this.log("===> FIRING IMPRESSION <===: " + c.$jscomp$loop$prop$url$9, "debug"), c.$jscomp$loop$prop$xhr$8 = new XMLHttpRequest, c.$jscomp$loop$prop$xhr$8.onreadystatechange = function(b) {
-      return function() {
-        b.$jscomp$loop$prop$xhr$8.readyState === XMLHttpRequest.DONE && 200 !== b.$jscomp$loop$prop$xhr$8.status && (a.log("impression response error " + b.$jscomp$loop$prop$url$9, "debug"), a.sendToEventTracker(a.CUSTOM_EVENT_TYPE, [{key:"fd", value:"badresponse"}]));
-      };
-    }(c), module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[c.$jscomp$loop$prop$url$9] = !0, this.log("sentImpressions[url]: " + JSON.stringify(module$contents$omid$client$VisibilityMeasurementClient_sentImpressions), "debug"), c.$jscomp$loop$prop$xhr$8.open("GET", c.$jscomp$loop$prop$url$9), c.$jscomp$loop$prop$xhr$8.send()), b++, c = {$jscomp$loop$prop$xhr$8:c.$jscomp$loop$prop$xhr$8, $jscomp$loop$prop$url$9:c.$jscomp$loop$prop$url$9};
+  if (0 !== a) {
+    a = 0;
+    for (var c = {}; this.currentScriptTag.dataset.hasOwnProperty("impurl-" + a);) {
+      c.$jscomp$loop$prop$url$8 = this.currentScriptTag.dataset["impurl-" + a], module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[c.$jscomp$loop$prop$url$8] ? this.log("impression url has been fired: " + c.$jscomp$loop$prop$url$8, "debug") : (this.log("===> FIRING IMPRESSION <===: " + c.$jscomp$loop$prop$url$8, "debug"), c.$jscomp$loop$prop$xhr$7 = new XMLHttpRequest, c.$jscomp$loop$prop$xhr$7.onreadystatechange = function(a) {
+        return function() {
+          a.$jscomp$loop$prop$xhr$7.readyState === XMLHttpRequest.DONE && 200 !== a.$jscomp$loop$prop$xhr$7.status && (b.log("impression response error " + a.$jscomp$loop$prop$url$8, "debug"), b.sendToEventTracker(b.CUSTOM_EVENT_TYPE, [{key:"fd", value:"badresponse"}]));
+        };
+      }(c), module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[c.$jscomp$loop$prop$url$8] = !0, this.log("sentImpressions[url]: " + JSON.stringify(module$contents$omid$client$VisibilityMeasurementClient_sentImpressions), "debug"), c.$jscomp$loop$prop$xhr$7.open("GET", c.$jscomp$loop$prop$url$8), c.$jscomp$loop$prop$xhr$7.send()), a++, c = {$jscomp$loop$prop$xhr$7:c.$jscomp$loop$prop$xhr$7, $jscomp$loop$prop$url$8:c.$jscomp$loop$prop$url$8};
+    }
+    0 < a ? (this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"impurlfired"}]), this.log("imp url fired", "debug")) : (this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"impurlnotfired"}]), this.log("imp url not fired", "debug"));
   }
-  0 < b ? (this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"impurlfired"}]), this.log("imp url fired", "debug")) : (this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"impurlnotfired"}]), this.log("imp url not fired", "debug"));
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.handleGeometryChangeEvent_ = function(a) {
   this.log("handleGeometryChangeEvent_", "debug");
