@@ -1,4 +1,8 @@
+// eslint-disable-next-line no-undef
+console.log("IX: omidGlobal: " + omidGlobal);
 console.log("IX: RENDER IX_RENDER_COUNTER_95784 render " + IX_RENDER_COUNTER_95784);
+
+
 if (IX_RENDER_COUNTER_95784 === undefined) {
     var IX_RENDER_COUNTER_95784 = 0
     console.log("IX: RENDER IX_RENDER_COUNTER_95784 init " + IX_RENDER_COUNTER_95784);
