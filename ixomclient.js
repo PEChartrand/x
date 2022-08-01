@@ -747,7 +747,7 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.fireImpUrls_ = 
       return function() {
         b.$jscomp$loop$prop$xhr$7.readyState === XMLHttpRequest.DONE && 200 !== b.$jscomp$loop$prop$xhr$7.status && (a.log("impression response error " + b.$jscomp$loop$prop$url$8, "debug"), a.sendToEventTracker(a.CUSTOM_EVENT_TYPE, [{key:"fd", value:"badresponse"}]));
       };
-    }(c), module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[c.$jscomp$loop$prop$url$8] = !0, this.log("sentImpressions[url]: " + JSON.stringify(module$contents$omid$client$VisibilityMeasurementClient_sentImpressions), "debug"), c.$jscomp$loop$prop$xhr$7.open("GET", c.$jscomp$loop$prop$url$8), c.$jscomp$loop$prop$xhr$7.send(), b++), c = {$jscomp$loop$prop$xhr$7:c.$jscomp$loop$prop$xhr$7, $jscomp$loop$prop$url$8:c.$jscomp$loop$prop$url$8};
+    }(c), module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[c.$jscomp$loop$prop$url$8] = !0, this.log("sentImpressions[url]: " + JSON.stringify(module$contents$omid$client$VisibilityMeasurementClient_sentImpressions), "debug"), c.$jscomp$loop$prop$xhr$7.open("GET", c.$jscomp$loop$prop$url$8), c.$jscomp$loop$prop$xhr$7.send()), b++, c = {$jscomp$loop$prop$xhr$7:c.$jscomp$loop$prop$xhr$7, $jscomp$loop$prop$url$8:c.$jscomp$loop$prop$url$8};
   }
   0 < b ? (this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"impurlfired"}]), this.log("imp url fired", "debug")) : (this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"impurlnotfired"}]), this.log("imp url not fired", "debug"));
 };
