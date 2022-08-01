@@ -617,10 +617,30 @@ function(a) {
   this.CUSTOM_EVENT_TYPE = 30;
   this.TYPE_QUERY_KEY = "t";
   a = document.querySelector("#ixomclient");
-  this.validateMetaData(a) ? (this.resetSessionFlags_(), this.debugMode = a.dataset.hasOwnProperty("dbg"), this.log("this.debugMode", "debug"), this.debugDiv = document.querySelector("#dbg"), this.log("this.debugDiv", "debug"), this.verificationClient_.isSupported() || this.log("Omid was not available for client to call", "warn"), this.verificationClient_.registerSessionObserver(function(a) {
-    return b.onSessionEvent_(a);
-  }), this.log("this.verificationClient_.registerSessionObserver", "debug"), this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.LOADED, this.loaded_.bind(this)), this.log("this.verificationClient_.addEventListener(AdEventType.LOADED", "debug"), this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.GEOMETRY_CHANGE, this.handleGeometryChangeEvent_.bind(this)), this.log("addEventListener(AdEventType.GEOMETRY_CHANGE", "debug"), 
-  this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.IMPRESSION, this.registerPubImpression_.bind(this)), this.log("addEventListener(AdEventType.IMPRESSION", "debug")) : this.log("meta data is invalid", "error");
+  if (this.validateMetaData(a)) {
+    this.resetSessionFlags_();
+    this.debugMode = a.dataset.hasOwnProperty("dbg");
+    this.log("this.debugMode", "debug");
+    this.debugDiv = document.querySelector("#dbg");
+    this.log("this.debugDiv", "debug");
+    this.verificationClient_.isSupported() || this.log("Omid was not available for client to call", "warn");
+    try {
+      this.verificationClient_.registerSessionObserver(function(a) {
+        return b.onSessionEvent_(a);
+      });
+    } catch (c) {
+      console.log(c.name + " " + c.media, "debug");
+    }
+    this.log("this.verificationClient_.registerSessionObserver", "debug");
+    this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.LOADED, this.loaded_.bind(this));
+    this.log("this.verificationClient_.addEventListener(AdEventType.LOADED", "debug");
+    this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.GEOMETRY_CHANGE, this.handleGeometryChangeEvent_.bind(this));
+    this.log("addEventListener(AdEventType.GEOMETRY_CHANGE", "debug");
+    this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.IMPRESSION, this.registerPubImpression_.bind(this));
+    this.log("addEventListener(AdEventType.IMPRESSION", "debug");
+  } else {
+    this.log("meta data is invalid", "error");
+  }
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.log = function(a, b) {
   switch(b) {
