@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-undef
-console.log("IX: omidGlobal: " + omidGlobal);
+
 console.log("IX: RENDER IX_RENDER_COUNTER_95784 render " + IX_RENDER_COUNTER_95784);
 
 
@@ -290,18 +290,19 @@ var module$exports$omid$common$guid = {generateGuid:function() {
 var module$exports$omid$common$OmidGlobalProvider = {};
 function module$contents$omid$common$OmidGlobalProvider_getOmidGlobal() {
   if ("undefined" !== typeof omidGlobal && omidGlobal) {
-    return omidGlobal;
+    return console.log("IX: omidGlobal: " + omidGlobal), omidGlobal;
   }
   if ("undefined" !== typeof global && global) {
-    return global;
+    return console.log("IX: global: " + global), global;
   }
   if ("undefined" !== typeof window && window) {
-    return window;
+    return console.log("IX: window: " + window), window;
   }
   if ("undefined" !== typeof globalThis && globalThis) {
-    return globalThis;
+    return console.log("IX: globalThis: " + globalThis), globalThis;
   }
   var a = Function("return this")();
+  console.log("IX: globalObject: " + a);
   if (a) {
     return a;
   }
