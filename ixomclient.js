@@ -612,7 +612,7 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.registerToEvent
   var b = this;
   this.log("registerToEvents()", "debug");
   if (a && "194057" !== this.publisherIDParameter) {
-    console.log("not a re-register pub");
+    this.log("not a re-register pub, current pub ID is: " + this.publisherIDParameter, "debug");
   } else {
     try {
       this.verificationClient_.registerSessionObserver(function(a) {
