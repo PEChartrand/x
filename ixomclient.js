@@ -277,19 +277,18 @@ var module$exports$omid$common$guid = {generateGuid:function() {
 var module$exports$omid$common$OmidGlobalProvider = {};
 function module$contents$omid$common$OmidGlobalProvider_getOmidGlobal() {
   if ("undefined" !== typeof omidGlobal && omidGlobal) {
-    return console.log("IX: omidGlobal: " + omidGlobal), omidGlobal;
+    return omidGlobal;
   }
   if ("undefined" !== typeof global && global) {
-    return console.log("IX: global: " + global), global;
+    return global;
   }
   if ("undefined" !== typeof window && window) {
-    return console.log("IX: window: " + window), window;
+    return window;
   }
   if ("undefined" !== typeof globalThis && globalThis) {
-    return console.log("IX: globalThis: " + globalThis), globalThis;
+    return globalThis;
   }
   var a = Function("return this")();
-  console.log("IX: globalObject: " + a);
   if (a) {
     return a;
   }
@@ -493,8 +492,7 @@ module$exports$omid$verificationClient$VerificationClient.prototype.injectionSou
 };
 module$exports$omid$verificationClient$VerificationClient.prototype.registerSessionObserver = function(a, b) {
   (0,module$exports$omid$common$argsChecker.assertFunction)("functionToExecute", a);
-  console.log("IX: this.omid3p: " + this.omid3p);
-  this.omid3p ? (console.log("IX: this.omid3p true: " + this.omid3p), this.omid3p.registerSessionObserver(a, b, this.injectionId_)) : (console.log("IX: this.omid3p FALSE"), this.sendMessage_("addSessionListener", a, b, this.injectionId_));
+  this.omid3p ? this.omid3p.registerSessionObserver(a, b, this.injectionId_) : this.sendMessage_("addSessionListener", a, b, this.injectionId_);
 };
 module$exports$omid$verificationClient$VerificationClient.prototype.addEventListener = function(a, b) {
   (0,module$exports$omid$common$argsChecker.assertTruthyString)("eventType", a);
@@ -596,9 +594,7 @@ module$exports$omid$verificationClient$VerificationClient.prototype.sendMessage_
   for (var d = [], e = 2; e < arguments.length; ++e) {
     d[e - 2] = arguments[e];
   }
-  console.log("IX: sendmessage");
-  this.communication && (console.log("IX: sendmessage has comms"), e = (0,module$exports$omid$common$guid.generateGuid)(), b && (console.log("IX: sendmessage has responseCallback"), this.callbackMap_[e] = b), d = new module$exports$omid$common$InternalMessage(e, "VerificationService." + a, module$contents$omid$verificationClient$VerificationClient_VERIFICATION_CLIENT_VERSION, (0,module$exports$omid$common$ArgsSerDe.serializeMessageArgs)(module$contents$omid$verificationClient$VerificationClient_VERIFICATION_CLIENT_VERSION, 
-  d)), console.log("IX: sendmessage new INternalMessage: "), this.communication.sendMessage(d));
+  this.communication && (e = (0,module$exports$omid$common$guid.generateGuid)(), b && (this.callbackMap_[e] = b), d = new module$exports$omid$common$InternalMessage(e, "VerificationService." + a, module$contents$omid$verificationClient$VerificationClient_VERIFICATION_CLIENT_VERSION, (0,module$exports$omid$common$ArgsSerDe.serializeMessageArgs)(module$contents$omid$verificationClient$VerificationClient_VERIFICATION_CLIENT_VERSION, d)), this.communication.sendMessage(d));
 };
 (0,module$exports$omid$common$exporter.packageExport)("OmidVerificationClient", module$exports$omid$verificationClient$VerificationClient);
 var module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_onePercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_onePixelSent = !1, module$contents$omid$client$VisibilityMeasurementClient_sentImpressions = {}, module$contents$omid$client$VisibilityMeasurementClient_pubImpCounter = 0, module$exports$omid$client$VisibilityMeasurementClient = 
@@ -614,8 +610,10 @@ function(a) {
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.registerToEvents = function(a) {
   var b = this;
-  if (!a || "194057" === this.publisherIDParameter) {
-    this.log("registerToEvents()", "debug");
+  this.log("registerToEvents()", "debug");
+  if (a && "194057" !== this.publisherIDParameter) {
+    console.log("not a re-register pub");
+  } else {
     try {
       this.verificationClient_.registerSessionObserver(function(a) {
         return b.onSessionEvent_(a);
@@ -684,14 +682,13 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.onSessionEvent_
   this.log("onSessionEvent_() event.type: " + a.type + ", adSessionID: " + a.adSessionId, "debug");
   switch(a.type) {
     case module$exports$omid$common$constants.AdEventType.SESSION_START:
-      this.log("SESSION START", "debug");
       this.sessionStartOccurred();
       break;
     case module$exports$omid$common$constants.AdEventType.LOADED:
       this.registerToEvents(!0);
+      this.resetSessionFlags_();
       break;
     case module$exports$omid$common$constants.AdEventType.SESSION_FINISH:
-      this.log("SESSION FINISH", "debug");
       this.viewed();
       this.resetSessionFlags_();
       this.registerToEvents(!0);
