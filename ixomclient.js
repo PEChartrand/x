@@ -759,7 +759,11 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.resetSessionFla
   module$contents$omid$client$VisibilityMeasurementClient_sessionEvents = {};
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.isEventSent = function(a, b) {
-  return module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a] ? !!module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a][b] : (module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a] = {}, !1);
+  if (!module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a]) {
+    return module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a] = {}, this.log("Event NOT sent: " + b + " " + a, "debug"), !1;
+  }
+  this.log("Event IS sent: " + !!module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a][b] + " " + b + " " + a, "debug");
+  return !!module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a][b];
 };
 new module$exports$omid$client$VisibilityMeasurementClient(new module$exports$omid$verificationClient$VerificationClient);
 
