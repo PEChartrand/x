@@ -597,8 +597,7 @@ module$exports$omid$verificationClient$VerificationClient.prototype.sendMessage_
   this.communication && (e = (0,module$exports$omid$common$guid.generateGuid)(), b && (this.callbackMap_[e] = b), d = new module$exports$omid$common$InternalMessage(e, "VerificationService." + a, module$contents$omid$verificationClient$VerificationClient_VERIFICATION_CLIENT_VERSION, (0,module$exports$omid$common$ArgsSerDe.serializeMessageArgs)(module$contents$omid$verificationClient$VerificationClient_VERIFICATION_CLIENT_VERSION, d)), this.communication.sendMessage(d));
 };
 (0,module$exports$omid$common$exporter.packageExport)("OmidVerificationClient", module$exports$omid$verificationClient$VerificationClient);
-var module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_onePercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_onePixelSent = !1, module$contents$omid$client$VisibilityMeasurementClient_sentImpressions = {}, module$contents$omid$client$VisibilityMeasurementClient_adSessionIDs = {}, module$exports$omid$client$VisibilityMeasurementClient = 
-function(a) {
+var module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_onePercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_onePixelSent = !1, module$contents$omid$client$VisibilityMeasurementClient_sentImpressions = {}, module$exports$omid$client$VisibilityMeasurementClient = function(a) {
   this.log("constructor", "debug");
   this.verificationClient_ = a;
   this.IMPRESSION_EVENT_TYPE = 1;
@@ -611,15 +610,16 @@ function(a) {
 module$exports$omid$client$VisibilityMeasurementClient.prototype.registerToEvents = function(a) {
   var b = this;
   this.log("registerToEvents()", "debug");
-  if (a && "p=194057" !== this.publisherIDParameter) {
+  var c = {"p=194057":!0, "p=199012":!0, "p=193049":!0, "p=194552":!0, "p=192502":!0, "p=199234":!0};
+  if (a && !c[this.publisherIDParameter]) {
     this.log("not a re-register pub, current pub ID is: " + this.publisherIDParameter, "debug");
   } else {
     try {
       this.verificationClient_.registerSessionObserver(function(a) {
         return b.onSessionEvent_(a);
       });
-    } catch (c) {
-      this.log(c.name + " " + c.media, "warn");
+    } catch (d) {
+      this.log(d.name + " " + d.media, "warn");
     }
     this.verificationClient_.addEventListener(module$exports$omid$common$constants.AdEventType.LOADED, this.loaded_.bind(this));
     this.log("this.verificationClient_.addEventListener(AdEventType.LOADED", "debug");
@@ -678,8 +678,6 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.registerPubImpr
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.onSessionEvent_ = function(a) {
   this.log("onSessionEvent_() event.type: " + a.type + ", adSessionID: " + a.adSessionId, "debug");
-  module$contents$omid$client$VisibilityMeasurementClient_adSessionIDs[a.adSessionId] = !0;
-  this.log(JSON.stringify(module$contents$omid$client$VisibilityMeasurementClient_adSessionIDs), "debug");
   switch(a.type) {
     case module$exports$omid$common$constants.AdEventType.SESSION_START:
       this.sessionStartOccurred();
