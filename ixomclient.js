@@ -642,7 +642,7 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.log = function(
 module$exports$omid$client$VisibilityMeasurementClient.prototype.validateMetaData = function(a) {
   null == a && this.log("An element with ID ixomclient is required for this omclient to work", "error");
   this.currentScriptTag = a;
-  a.dataset.hasOwnProperty("eturl") || this.log("no eventracker domain fond", "warn");
+  a.dataset.hasOwnProperty("eturl") || this.log("no event tracker domain fond", "warn");
   this.eventTrackerDomain = a.dataset.eturl;
   a.dataset.hasOwnProperty("pid") || this.log("no publisher id has been provided", "warn");
   this.publisherIDParameter = "p=" + encodeURIComponent(a.dataset.pid);
@@ -758,6 +758,7 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.resetSessionFla
   module$contents$omid$client$VisibilityMeasurementClient_sessionEvents = {};
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.isEventSent = function(a, b) {
+  this.log(b + " " + a + " already called", "debug");
   return module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a] ? !!module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a][b] : (module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a] = {}, !1);
 };
 new module$exports$omid$client$VisibilityMeasurementClient(new module$exports$omid$verificationClient$VerificationClient);
