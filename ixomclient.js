@@ -725,7 +725,7 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.callErrorOccurr
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.fireImpUrls_ = function(a) {
   var b = this;
-  this.log("fireImpUrls_()", "debug");
+  this.log("fireImpUrls_() " + a, "debug");
   if (0 !== a) {
     a = 0;
     for (var c = {}; this.currentScriptTag.dataset.hasOwnProperty("impurl-" + a);) {
@@ -742,6 +742,7 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.handleGeometryC
   this.log("handleGeometryChangeEvent_ " + a.adSessionId, "debug");
   if (!this.isEventSent(a.adSessionId, module$contents$omid$client$VisibilityMeasurementClient_evenIDs.GEOMETRY_CHANGE) && (module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a.adSessionId][module$contents$omid$client$VisibilityMeasurementClient_evenIDs.GEOMETRY_CHANGE] = !0, !module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent)) {
     var b = a.data.adView.percentageInView;
+    this.log("geo event percentageinview " + b, "debug");
     0 < b && this.fireImpUrls_(b);
     100 !== b || module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent ? 50 <= b && 100 > b && !module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent ? (this.sendToEventTracker(this.GEOMETRY_EVENT_TYPE, null, JSON.stringify(a.data)), this.log("percentageInView >= 50", "debug"), module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent = !0) : 0 < b && 50 > b && !module$contents$omid$client$VisibilityMeasurementClient_onePercentSent && (this.sendToEventTracker(this.GEOMETRY_EVENT_TYPE, 
     null, JSON.stringify(a.data)), this.log("percentageInView > 0", "debug"), module$contents$omid$client$VisibilityMeasurementClient_onePercentSent = !0) : (this.sendToEventTracker(this.GEOMETRY_EVENT_TYPE, null, JSON.stringify(a.data)), this.log("percentageInView === 100", "debug"), module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent = !0);
