@@ -729,7 +729,7 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.fireImpUrls_ = 
   if (0 !== a) {
     a = 0;
     for (var c = {}; this.currentScriptTag.dataset.hasOwnProperty("impurl-" + a);) {
-      c.$jscomp$loop$prop$url$8 = this.currentScriptTag.dataset["impurl-" + a], module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[c.$jscomp$loop$prop$url$8] ? this.log("impression url has been fired: " + c.$jscomp$loop$prop$url$8, "debug") : (this.log("===> FIRING IMPRESSION <===: " + c.$jscomp$loop$prop$url$8, "debug"), c.$jscomp$loop$prop$xhr$7 = new XMLHttpRequest, c.$jscomp$loop$prop$xhr$7.onreadystatechange = function(a) {
+      c.$jscomp$loop$prop$url$8 = this.currentScriptTag.dataset["impurl-" + a], module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[c.$jscomp$loop$prop$url$8] ? this.log("impression url has been fired : " + c.$jscomp$loop$prop$url$8, "debug") : (this.log("===> FIRING IMPRESSION [" + a + "] <===: " + c.$jscomp$loop$prop$url$8, "debug"), c.$jscomp$loop$prop$xhr$7 = new XMLHttpRequest, c.$jscomp$loop$prop$xhr$7.onreadystatechange = function(a) {
         return function() {
           a.$jscomp$loop$prop$xhr$7.readyState === XMLHttpRequest.DONE && 200 !== a.$jscomp$loop$prop$xhr$7.status && (b.log("impression response error " + a.$jscomp$loop$prop$url$8, "debug"), b.sendToEventTracker(b.CUSTOM_EVENT_TYPE, [{key:"fd", value:"badresponse"}]));
         };
