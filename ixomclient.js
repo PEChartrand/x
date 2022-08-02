@@ -706,7 +706,8 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.viewed = functi
   module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent || module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent || module$contents$omid$client$VisibilityMeasurementClient_onePercentSent || module$contents$omid$client$VisibilityMeasurementClient_onePixelSent ? (this.log("isviewed", "debug"), this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"viewed"}])) : (this.log("notviewed", "debug"), this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", 
   value:"notviewed"}]));
 };
-module$exports$omid$client$VisibilityMeasurementClient.prototype.loaded_ = function() {
+module$exports$omid$client$VisibilityMeasurementClient.prototype.loaded_ = function(a) {
+  this.log("loaded_ " + a.adSessionId, "debug");
   this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"adload"}]);
   this.log("loaded", "debug");
 };
@@ -758,9 +759,7 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.resetSessionFla
   module$contents$omid$client$VisibilityMeasurementClient_sessionEvents = {};
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.isEventSent = function(a, b) {
-  this.log("isEventSent: " + b + " " + a, "debug");
-  this.log(JSON.stringify(module$contents$omid$client$VisibilityMeasurementClient_sessionEvents), "debug");
-  if (!module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a]) {
+  if (!module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a][b]) {
     return module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a] = {}, this.log("Event NOT sent: " + b + " " + a, "debug"), !1;
   }
   this.log("Event IS sent: " + b + " " + a, "debug");
