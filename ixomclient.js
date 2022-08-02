@@ -760,7 +760,7 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.resetSessionFla
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.isEventSent = function(a, b) {
   if (!module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a]) {
-    return module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a] = {}, this.log("Event NOT sent: " + b + " " + a, "debug"), !1;
+    return module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a] = {}, this.log("New Session created : " + b + " " + a, "debug"), !1;
   }
   this.log("Event IS sent: " + !!module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a][b] + " " + b + " " + a, "debug");
   return !!module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a][b];
