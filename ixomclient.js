@@ -723,23 +723,26 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.callErrorOccurr
   this.log("callErrorOccurred - type:" + a.data.errorType + "; message: " + a.data.message, "warn");
   this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"error"}]);
 };
-module$exports$omid$client$VisibilityMeasurementClient.prototype.fireImpUrls_ = function() {
-  var a = this;
+module$exports$omid$client$VisibilityMeasurementClient.prototype.fireImpUrls_ = function(a) {
+  var b = this;
   this.log("fireImpUrls_()", "debug");
-  for (var b = 0, c = {}; this.currentScriptTag.dataset.hasOwnProperty("impurl-" + b);) {
-    c.$jscomp$loop$prop$url$8 = this.currentScriptTag.dataset["impurl-" + b], module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[c.$jscomp$loop$prop$url$8] ? this.log("impression url has been fired: " + c.$jscomp$loop$prop$url$8, "debug") : (this.log("===> FIRING IMPRESSION <===: " + c.$jscomp$loop$prop$url$8, "debug"), c.$jscomp$loop$prop$xhr$7 = new XMLHttpRequest, c.$jscomp$loop$prop$xhr$7.onreadystatechange = function(b) {
-      return function() {
-        b.$jscomp$loop$prop$xhr$7.readyState === XMLHttpRequest.DONE && 200 !== b.$jscomp$loop$prop$xhr$7.status && (a.log("impression response error " + b.$jscomp$loop$prop$url$8, "debug"), a.sendToEventTracker(a.CUSTOM_EVENT_TYPE, [{key:"fd", value:"badresponse"}]));
-      };
-    }(c), module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[c.$jscomp$loop$prop$url$8] = !0, this.log("sentImpressions[url]: " + JSON.stringify(module$contents$omid$client$VisibilityMeasurementClient_sentImpressions), "debug"), c.$jscomp$loop$prop$xhr$7.open("GET", c.$jscomp$loop$prop$url$8), c.$jscomp$loop$prop$xhr$7.send()), b++, c = {$jscomp$loop$prop$xhr$7:c.$jscomp$loop$prop$xhr$7, $jscomp$loop$prop$url$8:c.$jscomp$loop$prop$url$8};
+  if (0 !== a) {
+    a = 0;
+    for (var c = {}; this.currentScriptTag.dataset.hasOwnProperty("impurl-" + a);) {
+      c.$jscomp$loop$prop$url$8 = this.currentScriptTag.dataset["impurl-" + a], module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[c.$jscomp$loop$prop$url$8] ? this.log("impression url has been fired: " + c.$jscomp$loop$prop$url$8, "debug") : (this.log("===> FIRING IMPRESSION <===: " + c.$jscomp$loop$prop$url$8, "debug"), c.$jscomp$loop$prop$xhr$7 = new XMLHttpRequest, c.$jscomp$loop$prop$xhr$7.onreadystatechange = function(a) {
+        return function() {
+          a.$jscomp$loop$prop$xhr$7.readyState === XMLHttpRequest.DONE && 200 !== a.$jscomp$loop$prop$xhr$7.status && (b.log("impression response error " + a.$jscomp$loop$prop$url$8, "debug"), b.sendToEventTracker(b.CUSTOM_EVENT_TYPE, [{key:"fd", value:"badresponse"}]));
+        };
+      }(c), module$contents$omid$client$VisibilityMeasurementClient_sentImpressions[c.$jscomp$loop$prop$url$8] = !0, this.log("sentImpressions[url]: " + JSON.stringify(module$contents$omid$client$VisibilityMeasurementClient_sentImpressions), "debug"), c.$jscomp$loop$prop$xhr$7.open("GET", c.$jscomp$loop$prop$url$8), c.$jscomp$loop$prop$xhr$7.send()), a++, c = {$jscomp$loop$prop$xhr$7:c.$jscomp$loop$prop$xhr$7, $jscomp$loop$prop$url$8:c.$jscomp$loop$prop$url$8};
+    }
+    0 < a ? (this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"impurlfired"}]), this.log("imp url fired", "debug")) : (this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"impurlnotfired"}]), this.log("imp url not fired", "debug"));
   }
-  0 < b ? (this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"impurlfired"}]), this.log("imp url fired", "debug")) : (this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"impurlnotfired"}]), this.log("imp url not fired", "debug"));
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.handleGeometryChangeEvent_ = function(a) {
   this.log("handleGeometryChangeEvent_ " + a.adSessionId, "debug");
   if (!this.isEventSent(a.adSessionId, module$contents$omid$client$VisibilityMeasurementClient_evenIDs.GEOMETRY_CHANGE) && (module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a.adSessionId][module$contents$omid$client$VisibilityMeasurementClient_evenIDs.GEOMETRY_CHANGE] = !0, !module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent)) {
     var b = a.data.adView.percentageInView;
-    0 < b && this.fireImpUrls_();
+    0 < b && this.fireImpUrls_(b);
     100 !== b || module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent ? 50 <= b && 100 > b && !module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent ? (this.sendToEventTracker(this.GEOMETRY_EVENT_TYPE, null, JSON.stringify(a.data)), this.log("percentageInView >= 50", "debug"), module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent = !0) : 0 < b && 50 > b && !module$contents$omid$client$VisibilityMeasurementClient_onePercentSent && (this.sendToEventTracker(this.GEOMETRY_EVENT_TYPE, 
     null, JSON.stringify(a.data)), this.log("percentageInView > 0", "debug"), module$contents$omid$client$VisibilityMeasurementClient_onePercentSent = !0) : (this.sendToEventTracker(this.GEOMETRY_EVENT_TYPE, null, JSON.stringify(a.data)), this.log("percentageInView === 100", "debug"), module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent = !0);
   }
