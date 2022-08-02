@@ -597,8 +597,8 @@ module$exports$omid$verificationClient$VerificationClient.prototype.sendMessage_
   this.communication && (e = (0,module$exports$omid$common$guid.generateGuid)(), b && (this.callbackMap_[e] = b), d = new module$exports$omid$common$InternalMessage(e, "VerificationService." + a, module$contents$omid$verificationClient$VerificationClient_VERIFICATION_CLIENT_VERSION, (0,module$exports$omid$common$ArgsSerDe.serializeMessageArgs)(module$contents$omid$verificationClient$VerificationClient_VERIFICATION_CLIENT_VERSION, d)), this.communication.sendMessage(d));
 };
 (0,module$exports$omid$common$exporter.packageExport)("OmidVerificationClient", module$exports$omid$verificationClient$VerificationClient);
-var module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_onePercentSent = !1, module$contents$omid$client$VisibilityMeasurementClient_onePixelSent = !1, module$contents$omid$client$VisibilityMeasurementClient_sentImpressions = {}, module$contents$omid$client$VisibilityMeasurementClient_sessionEvents = {}, module$contents$omid$client$VisibilityMeasurementClient_evenIDs = 
-{SESSION_START:"SESSION_START", SESSION_FINISH:"SESSION_FINISH", IMPRESSION:"IMPRESSION", LOADED:"LOADED", GEOMETRY_CHANGE:"GEOMETRY_CHANGE", SESSION_ERROR:"SESSION_ERROR"}, module$exports$omid$client$VisibilityMeasurementClient = function(a) {
+var module$contents$omid$client$VisibilityMeasurementClient_sentImpressions = {}, module$contents$omid$client$VisibilityMeasurementClient_sessionEvents = {}, module$contents$omid$client$VisibilityMeasurementClient_eventIDs = {SESSION_START:"SESSION_START", SESSION_FINISH:"SESSION_FINISH", IMPRESSION:"IMPRESSION", LOADED:"LOADED", GEOMETRY_CHANGE_100:"GEOMETRY_CHANGE_100", GEOMETRY_CHANGE_50:"GEOMETRY_CHANGE_50", GEOMETRY_CHANGE_0:"GEOMETRY_CHANGE_0", SESSION_ERROR:"SESSION_ERROR"}, module$exports$omid$client$VisibilityMeasurementClient = 
+function(a) {
   this.log("constructor", "debug");
   this.verificationClient_ = a;
   this.IMPRESSION_EVENT_TYPE = 1;
@@ -675,25 +675,25 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.onSessionEvent_
   this.log("onSessionEvent_() event.type: " + a.type + ", adSessionID: " + a.adSessionId, "debug");
   switch(a.type) {
     case module$exports$omid$common$constants.AdEventType.SESSION_START:
-      if (this.isEventSent(a.adSessionId, module$contents$omid$client$VisibilityMeasurementClient_evenIDs.SESSION_START)) {
+      if (this.isEventSent(a.adSessionId, module$contents$omid$client$VisibilityMeasurementClient_eventIDs.SESSION_START)) {
         break;
       }
-      module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a.adSessionId][module$contents$omid$client$VisibilityMeasurementClient_evenIDs.SESSION_START] = !0;
+      module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a.adSessionId][module$contents$omid$client$VisibilityMeasurementClient_eventIDs.SESSION_START] = !0;
       this.sessionStartOccurred();
       break;
     case module$exports$omid$common$constants.AdEventType.LOADED:
-      if (this.isEventSent(a.adSessionId, module$contents$omid$client$VisibilityMeasurementClient_evenIDs.LOADED)) {
+      if (this.isEventSent(a.adSessionId, module$contents$omid$client$VisibilityMeasurementClient_eventIDs.LOADED)) {
         break;
       }
-      module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a.adSessionId][module$contents$omid$client$VisibilityMeasurementClient_evenIDs.LOADED] = !0;
+      module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a.adSessionId][module$contents$omid$client$VisibilityMeasurementClient_eventIDs.LOADED] = !0;
       this.resetSessionFlags_();
       break;
     case module$exports$omid$common$constants.AdEventType.SESSION_FINISH:
-      if (this.isEventSent(a.adSessionId, module$contents$omid$client$VisibilityMeasurementClient_evenIDs.SESSION_FINISH)) {
+      if (this.isEventSent(a.adSessionId, module$contents$omid$client$VisibilityMeasurementClient_eventIDs.SESSION_FINISH)) {
         break;
       }
-      module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a.adSessionId][module$contents$omid$client$VisibilityMeasurementClient_evenIDs.SESSION_FINISH] = !0;
-      this.viewed();
+      module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a.adSessionId][module$contents$omid$client$VisibilityMeasurementClient_eventIDs.SESSION_FINISH] = !0;
+      this.viewed(a.adSessionId);
       this.resetSessionFlags_();
       this.registerToEvents();
       break;
@@ -701,10 +701,10 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.onSessionEvent_
       this.callErrorOccurred_(a.data);
   }
 };
-module$exports$omid$client$VisibilityMeasurementClient.prototype.viewed = function() {
+module$exports$omid$client$VisibilityMeasurementClient.prototype.viewed = function(a) {
   this.log("viewed", "debug");
-  module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent || module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent || module$contents$omid$client$VisibilityMeasurementClient_onePercentSent || module$contents$omid$client$VisibilityMeasurementClient_onePixelSent ? (this.log("isviewed", "debug"), this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"viewed"}])) : (this.log("notviewed", "debug"), this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", 
-  value:"notviewed"}]));
+  this.isEventSent(a, module$contents$omid$client$VisibilityMeasurementClient_eventIDs.GEOMETRY_CHANGE_100) || this.isEventSent(a, module$contents$omid$client$VisibilityMeasurementClient_eventIDs.GEOMETRY_CHANGE_50) || this.isEventSent(a, module$contents$omid$client$VisibilityMeasurementClient_eventIDs.GEOMETRY_CHANGE_0) ? (this.log("isviewed", "debug"), this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, [{key:"fd", value:"viewed"}])) : (this.log("notviewed", "debug"), this.sendToEventTracker(this.CUSTOM_EVENT_TYPE, 
+  [{key:"fd", value:"notviewed"}]));
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.loaded_ = function(a) {
   this.log("loaded_ " + a.adSessionId, "debug");
@@ -740,22 +740,19 @@ module$exports$omid$client$VisibilityMeasurementClient.prototype.fireImpUrls_ = 
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.handleGeometryChangeEvent_ = function(a) {
   this.log("handleGeometryChangeEvent_ " + a.adSessionId, "debug");
-  if (!this.isEventSent(a.adSessionId, module$contents$omid$client$VisibilityMeasurementClient_evenIDs.GEOMETRY_CHANGE) && (module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a.adSessionId][module$contents$omid$client$VisibilityMeasurementClient_evenIDs.GEOMETRY_CHANGE] = !0, !module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent)) {
+  if (!this.isEventSent(a.adSessionId, module$contents$omid$client$VisibilityMeasurementClient_eventIDs.GEOMETRY_CHANGE_100)) {
     var b = a.data.adView.percentageInView;
     this.log("geo event percentageinview " + b, "debug");
     0 < b && this.fireImpUrls_(b);
-    100 !== b || module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent ? 50 <= b && 100 > b && !module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent ? (this.sendToEventTracker(this.GEOMETRY_EVENT_TYPE, null, JSON.stringify(a.data)), this.log("percentageInView >= 50", "debug"), module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent = !0) : 0 < b && 50 > b && !module$contents$omid$client$VisibilityMeasurementClient_onePercentSent && (this.sendToEventTracker(this.GEOMETRY_EVENT_TYPE, 
-    null, JSON.stringify(a.data)), this.log("percentageInView > 0", "debug"), module$contents$omid$client$VisibilityMeasurementClient_onePercentSent = !0) : (this.sendToEventTracker(this.GEOMETRY_EVENT_TYPE, null, JSON.stringify(a.data)), this.log("percentageInView === 100", "debug"), module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent = !0);
+    100 !== b || this.isEventSent(a.adSessionId, module$contents$omid$client$VisibilityMeasurementClient_eventIDs.GEOMETRY_CHANGE_100) ? 50 <= b && 100 > b && !this.isEventSent(a.adSessionId, module$contents$omid$client$VisibilityMeasurementClient_eventIDs.GEOMETRY_CHANGE_50) ? (this.sendToEventTracker(this.GEOMETRY_EVENT_TYPE, null, JSON.stringify(a.data)), this.log("percentageInView >= 50", "debug"), this.isEventSent(a.adSessionId, module$contents$omid$client$VisibilityMeasurementClient_eventIDs.GEOMETRY_CHANGE_50) || 
+    (module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a.adSessionId][module$contents$omid$client$VisibilityMeasurementClient_eventIDs.GEOMETRY_CHANGE_50] = !0)) : 0 < b && 50 > b && !this.isEventSent(a.adSessionId, module$contents$omid$client$VisibilityMeasurementClient_eventIDs.GEOMETRY_CHANGE_0) && (this.sendToEventTracker(this.GEOMETRY_EVENT_TYPE, null, JSON.stringify(a.data)), this.log("percentageInView > 0", "debug"), this.isEventSent(a.adSessionId, module$contents$omid$client$VisibilityMeasurementClient_eventIDs.GEOMETRY_CHANGE_0) || 
+    (module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a.adSessionId][module$contents$omid$client$VisibilityMeasurementClient_eventIDs.GEOMETRY_CHANGE_0] = !0)) : (this.sendToEventTracker(this.GEOMETRY_EVENT_TYPE, null, JSON.stringify(a.data)), this.log("percentageInView === 100", "debug"), this.isEventSent(a.adSessionId, module$contents$omid$client$VisibilityMeasurementClient_eventIDs.GEOMETRY_CHANGE_100) || (module$contents$omid$client$VisibilityMeasurementClient_sessionEvents[a.adSessionId][module$contents$omid$client$VisibilityMeasurementClient_eventIDs.GEOMETRY_CHANGE_100] = 
+    !0));
   }
 };
 module$exports$omid$client$VisibilityMeasurementClient.prototype.resetSessionFlags_ = function() {
   this.log("resetSessionFlags_", "debug");
-  this.log("reset hundredthPercentSent: " + module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent, "debug");
-  this.log("reset fiftyPercentSent: " + module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent, "debug");
-  this.log("reset onePercentSent: " + module$contents$omid$client$VisibilityMeasurementClient_onePercentSent, "debug");
-  this.log("reset onePixelSent: " + module$contents$omid$client$VisibilityMeasurementClient_onePixelSent, "debug");
   this.log("reset sentImpressions: " + JSON.stringify(module$contents$omid$client$VisibilityMeasurementClient_sentImpressions), "debug");
-  module$contents$omid$client$VisibilityMeasurementClient_onePixelSent = module$contents$omid$client$VisibilityMeasurementClient_onePercentSent = module$contents$omid$client$VisibilityMeasurementClient_fiftyPercentSent = module$contents$omid$client$VisibilityMeasurementClient_hundredthPercentSent = !1;
   module$contents$omid$client$VisibilityMeasurementClient_sentImpressions = {};
   module$contents$omid$client$VisibilityMeasurementClient_sessionEvents = {};
 };
